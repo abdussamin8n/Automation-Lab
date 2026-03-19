@@ -79,6 +79,18 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
+  /* আইকন float animation */
+  @keyframes iconFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+  }
+
+  /* SVG-র জন্য আলাদা float animation (rotate ছাড়া) */
+  @keyframes svgFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.04); }
+  }
+
   section {
     position: relative; z-index: 1;
     padding: 80px 60px 100px;
@@ -109,16 +121,13 @@
     color: var(--muted); font-size: 17px; line-height: 1.7;
   }
 
-  /* ===== CARDS GRID ===== */
   .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 28px;
-    /* সব row একই উচ্চতার হবে */
     align-items: stretch;
   }
 
-  /* ===== CARD — flex column যাতে বাটন সবসময় নিচে ===== */
   .card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -126,8 +135,6 @@
     position: relative;
     opacity: 0; transform: translateY(40px);
     transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.35s, border-color 0.35s;
-
-    /* এই তিনটা লাইনই সমস্যার সমাধান */
     display: flex;
     flex-direction: column;
   }
@@ -149,9 +156,9 @@
   .card-ig::before     { background: radial-gradient(circle at top left, rgba(255,107,255,0.12), transparent 60%); }
   .card-wa::before     { background: radial-gradient(circle at top left, rgba(0,245,160,0.12), transparent 60%); }
   .card-custom::before { background: radial-gradient(circle at top left, rgba(255,200,0,0.10), transparent 60%); }
-  .card-tg::before     { background: radial-gradient(circle at top left, rgba(0,136,204,0.12), transparent 60%); }
+  /* পার্পল গ্লো */
+  .card-tg::before     { background: radial-gradient(circle at top left, rgba(124,58,237,0.14), transparent 60%); }
 
-  /* Thumbnail — flex-shrink:0 যাতে কখনো ছোট না হয় */
   .thumb {
     position: relative; width: 100%; height: 200px;
     overflow: hidden; z-index: 1;
@@ -162,13 +169,17 @@
     display: flex; align-items: center; justify-content: center;
     position: relative;
   }
+
+  /* থাম্বনেইল ব্যাকগ্রাউন্ড */
   .card-fb  .thumb-bg  { background: linear-gradient(135deg, #0f1b4c 0%, #1877f2 100%); }
   .card-msg .thumb-bg  { background: linear-gradient(135deg, #0a1628 0%, #0099ff 100%); }
   .card-ig  .thumb-bg  { background: linear-gradient(135deg, #1a0533 0%, #ff6bff 100%); }
   .card-wa  .thumb-bg  { background: linear-gradient(135deg, #031a0f 0%, #00c853 100%); }
   .card-custom .thumb-bg { background: linear-gradient(135deg, #1a1400 0%, #f5a800 100%); }
-  .card-tg  .thumb-bg  { background: linear-gradient(135deg, #012233 0%, #0088cc 100%); }
+  /* পার্পল থিম */
+  .card-tg  .thumb-bg  { background: linear-gradient(135deg, #1a0533 0%, #7c3aed 100%); }
 
+  /* Font Awesome আইকন animation */
   .thumb-icon {
     font-size: 72px;
     filter: drop-shadow(0 0 30px rgba(255,255,255,0.3));
@@ -176,9 +187,12 @@
     position: relative; z-index: 1;
     color: #fff;
   }
-  @keyframes iconFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(5deg); }
+
+  /* SVG wrapper — এটাতেই animation লাগানো হয়েছে */
+  .svg-thumb {
+    position: relative; z-index: 1;
+    animation: svgFloat 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(192,132,252,0.4));
   }
 
   .particles { position: absolute; inset: 0; overflow: hidden; }
@@ -203,12 +217,9 @@
     color: rgba(255,255,255,0.8);
   }
 
-  /* ===== CARD BODY — flex grow করবে যাতে বাটন নিচে যায় ===== */
   .card-body {
     padding: 28px;
     position: relative; z-index: 1;
-
-    /* এই তিনটা লাইনই মূল সমাধান */
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -226,7 +237,8 @@
   .card-ig     .card-category { background: rgba(255,107,255,0.15); color: #ff6bff; }
   .card-wa     .card-category { background: rgba(0,200,83,0.15); color: #00f5a0; }
   .card-custom .card-category { background: rgba(245,168,0,0.15); color: #f5c842; }
-  .card-tg     .card-category { background: rgba(0,136,204,0.15); color: #29b6f6; }
+  /* পার্পল ক্যাটাগরি */
+  .card-tg     .card-category { background: rgba(124,58,237,0.18); color: #c084fc; }
 
   .card-title {
     font-family: 'Syne', sans-serif;
@@ -234,7 +246,6 @@
     line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.5px;
   }
 
-  /* desc — flex-grow:1 যাতে বাকি জায়গা নেয় এবং বাটন একদম নিচে যায় */
   .card-desc {
     font-size: 14px; color: var(--muted);
     line-height: 1.7;
@@ -242,7 +253,6 @@
     flex: 1;
   }
 
-  /* ===== BUTTON — সবসময় নিচে, margin-top:auto ===== */
   .demo-btn {
     display: flex; align-items: center; justify-content: center; gap: 10px;
     width: 100%; padding: 14px 20px; border-radius: 14px;
@@ -252,7 +262,7 @@
     position: relative; overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
     text-decoration: none;
-    margin-top: auto; /* বাটনকে সবসময় নিচে রাখে */
+    margin-top: auto;
     flex-shrink: 0;
   }
   .card-fb     .demo-btn { background: linear-gradient(135deg, #1877f2, #0d5abf); color: #fff; }
@@ -260,7 +270,8 @@
   .card-ig     .demo-btn { background: linear-gradient(135deg, #ff6bff, #cc00cc); color: #fff; }
   .card-wa     .demo-btn { background: linear-gradient(135deg, #00f5a0, #00c853); color: #070710; }
   .card-custom .demo-btn { background: linear-gradient(135deg, #f5a800, #e67e00); color: #070710; }
-  .card-tg     .demo-btn { background: linear-gradient(135deg, #0088cc, #0055aa); color: #fff; }
+  /* পার্পল বাটন */
+  .card-tg     .demo-btn { background: linear-gradient(135deg, #7c3aed, #5b21b6); color: #fff; }
 
   .demo-btn::after {
     content: ''; position: absolute; inset: 0;
@@ -460,7 +471,7 @@
       </div>
     </div>
 
-    <!-- Card 5: AI Photo Enhancer -->
+    <!-- Card 5: AI Photo Enhancer — পার্পল থিম + SVG animation -->
     <div class="card card-tg">
       <div class="thumb">
         <div class="thumb-bg">
@@ -470,66 +481,54 @@
             <div class="particle" style="left:72%;animation-delay:0.7s;animation-duration:2.8s"></div>
             <div class="particle" style="left:60%;animation-delay:0.2s;animation-duration:3.2s"></div>
           </div>
-          <!-- Custom Before → After SVG illustration -->
-          <svg width="260" height="130" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg" style="position:relative;z-index:1;">
-            <!-- Before card (dull/blurry look) -->
-            <rect x="8" y="15" width="100" height="100" rx="10" fill="#1a2233" stroke="#334" stroke-width="1.5"/>
-            <!-- blurry landscape inside -->
-            <rect x="8" y="65" width="100" height="50" rx="0" fill="#1e3a2a" style="border-radius:0 0 10px 10px"/>
-            <rect x="8" y="65" width="100" height="50" rx="0" fill="#1e3a2a"/>
-            <rect x="8" y="90" width="100" height="25" rx="0" fill="#1e2a1e"/>
-            <!-- blurry sky -->
-            <ellipse cx="30" cy="45" rx="18" ry="12" fill="#2a3a50" opacity="0.7"/>
-            <ellipse cx="60" cy="40" rx="22" ry="14" fill="#2a3a50" opacity="0.5"/>
-            <!-- dull sun -->
-            <circle cx="80" cy="35" r="10" fill="#4a5a30" opacity="0.6"/>
-            <!-- noise/grain overlay lines -->
-            <line x1="8" y1="30" x2="108" y2="30" stroke="#fff" stroke-opacity="0.04" stroke-width="1"/>
-            <line x1="8" y1="50" x2="108" y2="50" stroke="#fff" stroke-opacity="0.04" stroke-width="1"/>
-            <line x1="8" y1="70" x2="108" y2="70" stroke="#fff" stroke-opacity="0.04" stroke-width="1"/>
-            <line x1="8" y1="90" x2="108" y2="90" stroke="#fff" stroke-opacity="0.04" stroke-width="1"/>
-            <!-- BEFORE label -->
-            <rect x="14" y="21" width="42" height="14" rx="4" fill="rgba(0,0,0,0.55)"/>
-            <text x="35" y="32" font-family="Arial" font-size="9" font-weight="700" fill="#8899aa" text-anchor="middle" letter-spacing="1">BEFORE</text>
+          <!-- svg-thumb class দিয়ে svgFloat animation যোগ করা হয়েছে -->
+          <div class="svg-thumb">
+            <svg width="260" height="130" viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
+              <!-- Before card -->
+              <rect x="8" y="15" width="100" height="100" rx="10" fill="#1a2233" stroke="#334" stroke-width="1.5"/>
+              <rect x="8" y="65" width="100" height="50" rx="0" fill="#1e3a2a"/>
+              <rect x="8" y="90" width="100" height="25" rx="0" fill="#1e2a1e"/>
+              <ellipse cx="30" cy="45" rx="18" ry="12" fill="#2a3a50" opacity="0.7"/>
+              <ellipse cx="60" cy="40" rx="22" ry="14" fill="#2a3a50" opacity="0.5"/>
+              <circle cx="80" cy="35" r="10" fill="#4a5a30" opacity="0.6"/>
+              <line x1="8" y1="30" x2="108" y2="30" stroke="#fff" stroke-opacity="0.04" stroke-width="1"/>
+              <line x1="8" y1="50" x2="108" y2="50" stroke="#fff" stroke-opacity="0.04" stroke-width="1"/>
+              <line x1="8" y1="70" x2="108" y2="70" stroke="#fff" stroke-opacity="0.04" stroke-width="1"/>
+              <line x1="8" y1="90" x2="108" y2="90" stroke="#fff" stroke-opacity="0.04" stroke-width="1"/>
+              <rect x="14" y="21" width="42" height="14" rx="4" fill="rgba(0,0,0,0.55)"/>
+              <text x="35" y="32" font-family="Arial" font-size="9" font-weight="700" fill="#8899aa" text-anchor="middle" letter-spacing="1">BEFORE</text>
 
-            <!-- Arrow in middle -->
-            <circle cx="130" cy="65" r="18" fill="#0088cc" opacity="0.18"/>
-            <circle cx="130" cy="65" r="13" fill="#0088cc" opacity="0.3"/>
-            <!-- arrow shape -->
-            <polygon points="122,61 138,65 122,69" fill="#29b6f6"/>
-            <rect x="121" y="63" width="10" height="4" rx="2" fill="#29b6f6"/>
+              <!-- Arrow -->
+              <circle cx="130" cy="65" r="18" fill="#7c3aed" opacity="0.18"/>
+              <circle cx="130" cy="65" r="13" fill="#7c3aed" opacity="0.3"/>
+              <polygon points="122,61 138,65 122,69" fill="#c084fc"/>
+              <rect x="121" y="63" width="10" height="4" rx="2" fill="#c084fc"/>
 
-            <!-- After card (vibrant/sharp) -->
-            <rect x="152" y="15" width="100" height="100" rx="10" fill="#0a1a2e" stroke="#0088cc" stroke-width="1.5"/>
-            <!-- vivid sky -->
-            <rect x="152" y="15" width="100" height="55" rx="10" fill="#0d3b6e"/>
-            <rect x="152" y="50" width="100" height="20" rx="0" fill="#0d3b6e"/>
-            <!-- bright clouds -->
-            <ellipse cx="175" cy="38" rx="16" ry="9" fill="#1a6aaa" opacity="0.9"/>
-            <ellipse cx="200" cy="32" rx="20" ry="11" fill="#2288cc" opacity="0.8"/>
-            <!-- bright sun -->
-            <circle cx="232" cy="30" r="11" fill="#ffd700" opacity="0.95"/>
-            <circle cx="232" cy="30" r="7" fill="#fff7a0" opacity="0.8"/>
-            <!-- vivid ground -->
-            <rect x="152" y="70" width="100" height="45" rx="0" fill="#0a4a1a"/>
-            <rect x="152" y="95" width="100" height="20" rx="0" fill="#083810"/>
-            <!-- sharp detail lines (grass) -->
-            <line x1="160" y1="85" x2="165" y2="70" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.7"/>
-            <line x1="172" y1="87" x2="177" y2="72" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.7"/>
-            <line x1="184" y1="84" x2="189" y2="70" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.6"/>
-            <line x1="196" y1="86" x2="201" y2="71" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.7"/>
-            <line x1="208" y1="85" x2="213" y2="70" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.6"/>
-            <line x1="220" y1="87" x2="225" y2="72" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.7"/>
-            <line x1="232" y1="84" x2="237" y2="70" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.6"/>
-            <line x1="244" y1="86" x2="248" y2="71" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.5"/>
-            <!-- AFTER label -->
-            <rect x="158" y="21" width="36" height="14" rx="4" fill="rgba(0,136,204,0.5)"/>
-            <text x="176" y="32" font-family="Arial" font-size="9" font-weight="700" fill="#29b6f6" text-anchor="middle" letter-spacing="1">AFTER</text>
-            <!-- sparkle stars on after -->
-            <text x="240" y="58" font-size="11" fill="#ffd700" opacity="0.9">✦</text>
-            <text x="156" y="68" font-size="8" fill="#00f5a0" opacity="0.8">✦</text>
-            <text x="248" y="75" font-size="7" fill="#ffd700" opacity="0.7">✦</text>
-          </svg>
+              <!-- After card -->
+              <rect x="152" y="15" width="100" height="100" rx="10" fill="#0a1a2e" stroke="#7c3aed" stroke-width="1.5"/>
+              <rect x="152" y="15" width="100" height="55" rx="10" fill="#0d3b6e"/>
+              <rect x="152" y="50" width="100" height="20" rx="0" fill="#0d3b6e"/>
+              <ellipse cx="175" cy="38" rx="16" ry="9" fill="#1a6aaa" opacity="0.9"/>
+              <ellipse cx="200" cy="32" rx="20" ry="11" fill="#2288cc" opacity="0.8"/>
+              <circle cx="232" cy="30" r="11" fill="#ffd700" opacity="0.95"/>
+              <circle cx="232" cy="30" r="7" fill="#fff7a0" opacity="0.8"/>
+              <rect x="152" y="70" width="100" height="45" rx="0" fill="#0a4a1a"/>
+              <rect x="152" y="95" width="100" height="20" rx="0" fill="#083810"/>
+              <line x1="160" y1="85" x2="165" y2="70" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.7"/>
+              <line x1="172" y1="87" x2="177" y2="72" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.7"/>
+              <line x1="184" y1="84" x2="189" y2="70" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.6"/>
+              <line x1="196" y1="86" x2="201" y2="71" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.7"/>
+              <line x1="208" y1="85" x2="213" y2="70" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.6"/>
+              <line x1="220" y1="87" x2="225" y2="72" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.7"/>
+              <line x1="232" y1="84" x2="237" y2="70" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.6"/>
+              <line x1="244" y1="86" x2="248" y2="71" stroke="#00c853" stroke-width="1.5" stroke-opacity="0.5"/>
+              <rect x="158" y="21" width="36" height="14" rx="4" fill="rgba(124,58,237,0.5)"/>
+              <text x="176" y="32" font-family="Arial" font-size="9" font-weight="700" fill="#c084fc" text-anchor="middle" letter-spacing="1">AFTER</text>
+              <text x="240" y="58" font-size="11" fill="#ffd700" opacity="0.9">✦</text>
+              <text x="156" y="68" font-size="8" fill="#c084fc" opacity="0.8">✦</text>
+              <text x="248" y="75" font-size="7" fill="#ffd700" opacity="0.7">✦</text>
+            </svg>
+          </div>
         </div>
         <div class="thumb-badge">🎨 AI পাওয়ার্ড</div>
       </div>
