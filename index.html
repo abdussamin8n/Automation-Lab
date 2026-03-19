@@ -109,12 +109,16 @@
     color: var(--muted); font-size: 17px; line-height: 1.7;
   }
 
+  /* ===== CARDS GRID ===== */
   .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 28px;
+    /* সব row একই উচ্চতার হবে */
+    align-items: stretch;
   }
 
+  /* ===== CARD — flex column যাতে বাটন সবসময় নিচে ===== */
   .card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -122,6 +126,10 @@
     position: relative;
     opacity: 0; transform: translateY(40px);
     transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.35s, border-color 0.35s;
+
+    /* এই তিনটা লাইনই সমস্যার সমাধান */
+    display: flex;
+    flex-direction: column;
   }
   .card.visible { opacity: 1; transform: translateY(0); }
   .card:hover {
@@ -136,26 +144,30 @@
     transition: opacity 0.35s; z-index: 0;
   }
   .card:hover::before { opacity: 1; }
-  .card-fb::before   { background: radial-gradient(circle at top left, rgba(24,119,242,0.12), transparent 60%); }
-  .card-msg::before  { background: radial-gradient(circle at top left, rgba(0,185,255,0.12), transparent 60%); }
-  .card-ig::before   { background: radial-gradient(circle at top left, rgba(255,107,255,0.12), transparent 60%); }
-  .card-wa::before   { background: radial-gradient(circle at top left, rgba(0,245,160,0.12), transparent 60%); }
+  .card-fb::before     { background: radial-gradient(circle at top left, rgba(24,119,242,0.12), transparent 60%); }
+  .card-msg::before    { background: radial-gradient(circle at top left, rgba(0,185,255,0.12), transparent 60%); }
+  .card-ig::before     { background: radial-gradient(circle at top left, rgba(255,107,255,0.12), transparent 60%); }
+  .card-wa::before     { background: radial-gradient(circle at top left, rgba(0,245,160,0.12), transparent 60%); }
   .card-custom::before { background: radial-gradient(circle at top left, rgba(255,200,0,0.10), transparent 60%); }
+  .card-tg::before     { background: radial-gradient(circle at top left, rgba(0,136,204,0.12), transparent 60%); }
 
+  /* Thumbnail — flex-shrink:0 যাতে কখনো ছোট না হয় */
   .thumb {
     position: relative; width: 100%; height: 200px;
     overflow: hidden; z-index: 1;
+    flex-shrink: 0;
   }
   .thumb-bg {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
     position: relative;
   }
-  .card-fb  .thumb-bg { background: linear-gradient(135deg, #0f1b4c 0%, #1877f2 100%); }
-  .card-msg .thumb-bg { background: linear-gradient(135deg, #0a1628 0%, #0099ff 100%); }
-  .card-ig  .thumb-bg { background: linear-gradient(135deg, #1a0533 0%, #ff6bff 100%); }
-  .card-wa  .thumb-bg { background: linear-gradient(135deg, #031a0f 0%, #00c853 100%); }
+  .card-fb  .thumb-bg  { background: linear-gradient(135deg, #0f1b4c 0%, #1877f2 100%); }
+  .card-msg .thumb-bg  { background: linear-gradient(135deg, #0a1628 0%, #0099ff 100%); }
+  .card-ig  .thumb-bg  { background: linear-gradient(135deg, #1a0533 0%, #ff6bff 100%); }
+  .card-wa  .thumb-bg  { background: linear-gradient(135deg, #031a0f 0%, #00c853 100%); }
   .card-custom .thumb-bg { background: linear-gradient(135deg, #1a1400 0%, #f5a800 100%); }
+  .card-tg  .thumb-bg  { background: linear-gradient(135deg, #012233 0%, #0088cc 100%); }
 
   .thumb-icon {
     font-size: 72px;
@@ -191,31 +203,46 @@
     color: rgba(255,255,255,0.8);
   }
 
-  .card-body { padding: 28px; position: relative; z-index: 1; }
+  /* ===== CARD BODY — flex grow করবে যাতে বাটন নিচে যায় ===== */
+  .card-body {
+    padding: 28px;
+    position: relative; z-index: 1;
+
+    /* এই তিনটা লাইনই মূল সমাধান */
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
 
   .card-category {
     display: inline-block;
     font-size: 11px; font-weight: 600;
     letter-spacing: 2px; text-transform: uppercase;
     padding: 4px 12px; border-radius: 50px; margin-bottom: 14px;
+    align-self: flex-start;
   }
-  .card-fb   .card-category { background: rgba(24,119,242,0.15); color: #5b9ef7; }
-  .card-msg  .card-category { background: rgba(0,153,255,0.15); color: #4dcfff; }
-  .card-ig   .card-category { background: rgba(255,107,255,0.15); color: #ff6bff; }
-  .card-wa   .card-category { background: rgba(0,200,83,0.15); color: #00f5a0; }
+  .card-fb     .card-category { background: rgba(24,119,242,0.15); color: #5b9ef7; }
+  .card-msg    .card-category { background: rgba(0,153,255,0.15); color: #4dcfff; }
+  .card-ig     .card-category { background: rgba(255,107,255,0.15); color: #ff6bff; }
+  .card-wa     .card-category { background: rgba(0,200,83,0.15); color: #00f5a0; }
   .card-custom .card-category { background: rgba(245,168,0,0.15); color: #f5c842; }
+  .card-tg     .card-category { background: rgba(0,136,204,0.15); color: #29b6f6; }
 
   .card-title {
     font-family: 'Syne', sans-serif;
     font-size: 22px; font-weight: 700;
     line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.5px;
   }
+
+  /* desc — flex-grow:1 যাতে বাকি জায়গা নেয় এবং বাটন একদম নিচে যায় */
   .card-desc {
     font-size: 14px; color: var(--muted);
-    line-height: 1.7; margin-bottom: 24px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    flex: 1;
   }
 
-  /* Demo Button */
+  /* ===== BUTTON — সবসময় নিচে, margin-top:auto ===== */
   .demo-btn {
     display: flex; align-items: center; justify-content: center; gap: 10px;
     width: 100%; padding: 14px 20px; border-radius: 14px;
@@ -225,12 +252,15 @@
     position: relative; overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
     text-decoration: none;
+    margin-top: auto; /* বাটনকে সবসময় নিচে রাখে */
+    flex-shrink: 0;
   }
-  .card-fb  .demo-btn { background: linear-gradient(135deg, #1877f2, #0d5abf); color: #fff; }
-  .card-msg .demo-btn { background: linear-gradient(135deg, #0099ff, #0066cc); color: #fff; }
-  .card-ig  .demo-btn { background: linear-gradient(135deg, #ff6bff, #cc00cc); color: #fff; }
-  .card-wa  .demo-btn { background: linear-gradient(135deg, #00f5a0, #00c853); color: #070710; }
+  .card-fb     .demo-btn { background: linear-gradient(135deg, #1877f2, #0d5abf); color: #fff; }
+  .card-msg    .demo-btn { background: linear-gradient(135deg, #0099ff, #0066cc); color: #fff; }
+  .card-ig     .demo-btn { background: linear-gradient(135deg, #ff6bff, #cc00cc); color: #fff; }
+  .card-wa     .demo-btn { background: linear-gradient(135deg, #00f5a0, #00c853); color: #070710; }
   .card-custom .demo-btn { background: linear-gradient(135deg, #f5a800, #e67e00); color: #070710; }
+  .card-tg     .demo-btn { background: linear-gradient(135deg, #0088cc, #0055aa); color: #fff; }
 
   .demo-btn::after {
     content: ''; position: absolute; inset: 0;
@@ -430,7 +460,31 @@
       </div>
     </div>
 
-    <!-- Card 5: Custom AI Automation -->
+    <!-- Card 5: Telegram AI Image -->
+    <div class="card card-tg">
+      <div class="thumb">
+        <div class="thumb-bg">
+          <div class="particles">
+            <div class="particle" style="left:18%;animation-delay:0.4s;animation-duration:2.6s"></div>
+            <div class="particle" style="left:48%;animation-delay:1.1s;animation-duration:3s"></div>
+            <div class="particle" style="left:72%;animation-delay:0.7s;animation-duration:2.8s"></div>
+            <div class="particle" style="left:60%;animation-delay:0.2s;animation-duration:3.2s"></div>
+          </div>
+          <div class="thumb-icon"><i class="fab fa-telegram-plane"></i></div>
+        </div>
+        <div class="thumb-badge">🎨 AI পাওয়ার্ড</div>
+      </div>
+      <div class="card-body">
+        <span class="card-category">Telegram</span>
+        <h3 class="card-title">Telegram AI Image Enhancer</h3>
+        <p class="card-desc">টেলিগ্রামে একটা সাধারণ ছবি পাঠান — AI স্বয়ংক্রিয়ভাবে সেটাকে প্রফেশনাল মানের ছবিতে রূপান্তরিত করে দেবে। এডিটিং জ্ঞান ছাড়াই পান স্টুডিও কোয়ালিটি রেজাল্ট।</p>
+        <button class="demo-btn" onclick="openModal('telegram-ai','Telegram AI Image Enhancer')">
+          <span class="btn-icon">▶</span> ডেমো ভিডিও দেখুন
+        </button>
+      </div>
+    </div>
+
+    <!-- Card 6: Custom AI Automation -->
     <div class="card card-custom">
       <div class="thumb">
         <div class="thumb-bg">
@@ -489,7 +543,6 @@
     mouseX=e.clientX; mouseY=e.clientY;
     cursor.style.transform=`translate(${mouseX-6}px,${mouseY-6}px)`;
   });
-
   function animateRing() {
     ringX += (mouseX-ringX)*0.12;
     ringY += (mouseY-ringY)*0.12;
@@ -513,10 +566,11 @@
   });
 
   const videoLinks = {
-    'fb-comment': 'https://www.youtube.com/embed/8gNodNIRXE4',
-    'messenger':  'https://www.youtube.com/embed/LAgy5VxHgCg',
-    'instagram':  'https://www.youtube.com/embed/dQw4w9WgXcQ',
-    'whatsapp':   'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    'fb-comment':  'https://www.youtube.com/embed/8gNodNIRXE4',
+    'messenger':   'https://www.youtube.com/embed/LAgy5VxHgCg',
+    'instagram':   'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    'whatsapp':    'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    'telegram-ai': 'https://www.youtube.com/embed/dQw4w9WgXcQ',
   };
   let currentVideo='';
 
