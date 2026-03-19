@@ -20,7 +20,6 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -31,14 +30,12 @@
     cursor: none;
   }
 
-  /* Custom Cursor */
   #cursor {
     width: 12px; height: 12px;
     background: var(--accent1);
     border-radius: 50%;
     position: fixed; top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9999;
+    pointer-events: none; z-index: 9999;
     transition: transform 0.1s ease;
     mix-blend-mode: screen;
   }
@@ -47,12 +44,10 @@
     border: 1.5px solid rgba(0,245,160,0.4);
     border-radius: 50%;
     position: fixed; top: 0; left: 0;
-    pointer-events: none;
-    z-index: 9998;
+    pointer-events: none; z-index: 9998;
     transition: transform 0.18s ease, width 0.2s, height 0.2s, border-color 0.2s;
   }
 
-  /* Animated BG */
   .bg-grid {
     position: fixed; inset: 0; z-index: 0;
     background-image:
@@ -67,12 +62,9 @@
   }
 
   .orb {
-    position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.18;
-    animation: orbFloat 12s ease-in-out infinite alternate;
-    z-index: 0;
+    position: fixed; border-radius: 50%;
+    filter: blur(80px); opacity: 0.18;
+    animation: orbFloat 12s ease-in-out infinite alternate; z-index: 0;
   }
   .orb1 { width: 500px; height: 500px; background: var(--accent1); top: -150px; left: -100px; animation-duration: 14s; }
   .orb2 { width: 400px; height: 400px; background: var(--accent2); bottom: -100px; right: -50px; animation-duration: 18s; animation-delay: -6s; }
@@ -87,7 +79,6 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* Section */
   section {
     position: relative; z-index: 1;
     padding: 80px 60px 100px;
@@ -95,21 +86,18 @@
   }
 
   .section-header {
-    text-align: center;
-    margin-bottom: 70px;
+    text-align: center; margin-bottom: 70px;
+    animation: fadeUp 0.8s ease both;
   }
   .section-tag {
     display: inline-block;
     font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--accent2); font-weight: 600;
-    margin-bottom: 16px;
+    color: var(--accent2); font-weight: 600; margin-bottom: 16px;
   }
   .section-title {
     font-family: 'Syne', sans-serif;
     font-size: clamp(36px, 5vw, 64px);
-    font-weight: 800;
-    letter-spacing: -2px;
-    line-height: 1.1;
+    font-weight: 800; letter-spacing: -2px; line-height: 1.1;
   }
   .section-title em {
     font-style: normal;
@@ -121,7 +109,6 @@
     color: var(--muted); font-size: 17px; line-height: 1.7;
   }
 
-  /* Cards Grid */
   .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -131,89 +118,72 @@
   .card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 24px;
-    overflow: hidden;
+    border-radius: 24px; overflow: hidden;
     position: relative;
-    transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.35s, border-color 0.35s;
-    opacity: 0;
-    transform: translateY(40px);
+    opacity: 0; transform: translateY(40px);
     transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.35s, border-color 0.35s;
   }
-  .card.visible {
-    opacity: 1; transform: translateY(0);
-  }
+  .card.visible { opacity: 1; transform: translateY(0); }
   .card:hover {
     transform: translateY(-10px) scale(1.02);
     box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.15);
-    z-index: 2;
+    border-color: rgba(255,255,255,0.15); z-index: 2;
   }
 
-  /* Card glow on hover */
   .card::before {
-    content: '';
-    position: absolute; inset: 0;
-    border-radius: 24px;
-    opacity: 0;
-    transition: opacity 0.35s;
-    z-index: 0;
+    content: ''; position: absolute; inset: 0;
+    border-radius: 24px; opacity: 0;
+    transition: opacity 0.35s; z-index: 0;
   }
   .card:hover::before { opacity: 1; }
   .card-fb::before   { background: radial-gradient(circle at top left, rgba(24,119,242,0.12), transparent 60%); }
   .card-msg::before  { background: radial-gradient(circle at top left, rgba(0,185,255,0.12), transparent 60%); }
   .card-ig::before   { background: radial-gradient(circle at top left, rgba(255,107,255,0.12), transparent 60%); }
   .card-wa::before   { background: radial-gradient(circle at top left, rgba(0,245,160,0.12), transparent 60%); }
+  .card-custom::before { background: radial-gradient(circle at top left, rgba(255,200,0,0.10), transparent 60%); }
 
-  /* Thumbnail */
   .thumb {
-    position: relative;
-    width: 100%; height: 200px;
-    overflow: hidden;
-    z-index: 1;
+    position: relative; width: 100%; height: 200px;
+    overflow: hidden; z-index: 1;
   }
   .thumb-bg {
     width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
     position: relative;
   }
-  .card-fb .thumb-bg    { background: linear-gradient(135deg, #0f1b4c 0%, #1877f2 100%); }
-  .card-msg .thumb-bg   { background: linear-gradient(135deg, #0a1628 0%, #0099ff 100%); }
-  .card-ig .thumb-bg    { background: linear-gradient(135deg, #1a0533 0%, #ff6bff 100%); }
-  .card-wa .thumb-bg    { background: linear-gradient(135deg, #031a0f 0%, #00c853 100%); }
+  .card-fb  .thumb-bg { background: linear-gradient(135deg, #0f1b4c 0%, #1877f2 100%); }
+  .card-msg .thumb-bg { background: linear-gradient(135deg, #0a1628 0%, #0099ff 100%); }
+  .card-ig  .thumb-bg { background: linear-gradient(135deg, #1a0533 0%, #ff6bff 100%); }
+  .card-wa  .thumb-bg { background: linear-gradient(135deg, #031a0f 0%, #00c853 100%); }
+  .card-custom .thumb-bg { background: linear-gradient(135deg, #1a1400 0%, #f5a800 100%); }
 
   .thumb-icon {
     font-size: 72px;
     filter: drop-shadow(0 0 30px rgba(255,255,255,0.3));
     animation: iconFloat 4s ease-in-out infinite;
     position: relative; z-index: 1;
+    color: #fff;
   }
   @keyframes iconFloat {
     0%, 100% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-10px) rotate(5deg); }
   }
 
-  /* Floating particles in thumb */
-  .particles {
-    position: absolute; inset: 0;
-    overflow: hidden;
-  }
+  .particles { position: absolute; inset: 0; overflow: hidden; }
   .particle {
-    position: absolute;
-    width: 4px; height: 4px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.5);
+    position: absolute; width: 4px; height: 4px;
+    border-radius: 50%; background: rgba(255,255,255,0.5);
     animation: particleRise 3s ease-in-out infinite;
   }
   @keyframes particleRise {
-    0% { transform: translateY(100px) scale(0); opacity: 0; }
-    50% { opacity: 1; }
+    0%   { transform: translateY(100px) scale(0); opacity: 0; }
+    50%  { opacity: 1; }
     100% { transform: translateY(-20px) scale(1); opacity: 0; }
   }
 
   .thumb-badge {
     position: absolute; top: 14px; right: 14px;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.15);
     padding: 5px 12px; border-radius: 50px;
     font-size: 11px; font-weight: 600;
@@ -221,78 +191,55 @@
     color: rgba(255,255,255,0.8);
   }
 
-  /* Card body */
-  .card-body {
-    padding: 28px;
-    position: relative; z-index: 1;
-  }
+  .card-body { padding: 28px; position: relative; z-index: 1; }
 
   .card-category {
     display: inline-block;
     font-size: 11px; font-weight: 600;
     letter-spacing: 2px; text-transform: uppercase;
-    padding: 4px 12px; border-radius: 50px;
-    margin-bottom: 14px;
+    padding: 4px 12px; border-radius: 50px; margin-bottom: 14px;
   }
   .card-fb   .card-category { background: rgba(24,119,242,0.15); color: #5b9ef7; }
   .card-msg  .card-category { background: rgba(0,153,255,0.15); color: #4dcfff; }
   .card-ig   .card-category { background: rgba(255,107,255,0.15); color: #ff6bff; }
   .card-wa   .card-category { background: rgba(0,200,83,0.15); color: #00f5a0; }
+  .card-custom .card-category { background: rgba(245,168,0,0.15); color: #f5c842; }
 
   .card-title {
     font-family: 'Syne', sans-serif;
     font-size: 22px; font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 12px;
-    letter-spacing: -0.5px;
+    line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.5px;
   }
-
   .card-desc {
     font-size: 14px; color: var(--muted);
-    line-height: 1.7; margin-bottom: 20px;
+    line-height: 1.7; margin-bottom: 24px;
   }
-
-  /* Feature pills */
-  .features {
-    display: flex; flex-wrap: wrap; gap: 8px;
-    margin-bottom: 24px;
-  }
-  .feat {
-    display: flex; align-items: center; gap: 6px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    padding: 5px 12px; border-radius: 50px;
-    font-size: 12px; color: rgba(255,255,255,0.6);
-  }
-  .feat::before { content: '✦'; font-size: 9px; opacity: 0.6; }
 
   /* Demo Button */
   .demo-btn {
     display: flex; align-items: center; justify-content: center; gap: 10px;
-    width: 100%;
-    padding: 14px 20px; border-radius: 14px;
+    width: 100%; padding: 14px 20px; border-radius: 14px;
     font-family: 'Syne', sans-serif;
     font-size: 15px; font-weight: 700;
     cursor: pointer; border: none;
     position: relative; overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
   }
   .card-fb  .demo-btn { background: linear-gradient(135deg, #1877f2, #0d5abf); color: #fff; }
   .card-msg .demo-btn { background: linear-gradient(135deg, #0099ff, #0066cc); color: #fff; }
   .card-ig  .demo-btn { background: linear-gradient(135deg, #ff6bff, #cc00cc); color: #fff; }
   .card-wa  .demo-btn { background: linear-gradient(135deg, #00f5a0, #00c853); color: #070710; }
+  .card-custom .demo-btn { background: linear-gradient(135deg, #f5a800, #e67e00); color: #070710; }
 
   .demo-btn::after {
-    content: '';
-    position: absolute; inset: 0;
+    content: ''; position: absolute; inset: 0;
     background: rgba(255,255,255,0.15);
-    transform: translateX(-100%);
-    transition: transform 0.4s ease;
+    transform: translateX(-100%); transition: transform 0.4s ease;
   }
   .demo-btn:hover::after { transform: translateX(100%); }
   .demo-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
   .demo-btn:active { transform: scale(0.97); }
-
   .btn-icon { font-size: 20px; }
 
   /* Modal */
@@ -306,20 +253,16 @@
     transition: opacity 0.3s, visibility 0.3s;
   }
   .modal-overlay.open { opacity: 1; visibility: visible; }
-
   .modal {
     background: var(--card);
     border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 28px;
-    width: 90%; max-width: 800px;
-    padding: 40px;
+    border-radius: 28px; width: 90%; max-width: 800px; padding: 40px;
     position: relative;
     transform: scale(0.9) translateY(20px);
     transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
     box-shadow: 0 50px 100px rgba(0,0,0,0.5);
   }
   .modal-overlay.open .modal { transform: scale(1) translateY(0); }
-
   .modal-close {
     position: absolute; top: 20px; right: 20px;
     width: 40px; height: 40px;
@@ -329,34 +272,18 @@
     transition: background 0.2s, transform 0.2s;
   }
   .modal-close:hover { background: rgba(255,255,255,0.12); transform: rotate(90deg); }
-
-  .modal-eyebrow {
-    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
-    color: var(--accent2); font-weight: 600; margin-bottom: 10px;
-  }
-  .modal-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 28px; font-weight: 800;
-    margin-bottom: 24px; letter-spacing: -1px;
-  }
-
+  .modal-eyebrow { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent2); font-weight: 600; margin-bottom: 10px; }
+  .modal-title { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; margin-bottom: 24px; letter-spacing: -1px; }
   .video-wrapper {
-    background: #000;
-    border-radius: 16px;
-    overflow: hidden;
-    aspect-ratio: 16/9;
-    position: relative;
+    background: #000; border-radius: 16px; overflow: hidden;
+    aspect-ratio: 16/9; position: relative;
     border: 1px solid rgba(255,255,255,0.08);
   }
-  .video-wrapper iframe {
-    width: 100%; height: 100%;
-    border: none;
-  }
+  .video-wrapper iframe { width: 100%; height: 100%; border: none; }
   .video-placeholder {
     width: 100%; height: 100%;
     display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 20px;
+    align-items: center; justify-content: center; gap: 20px;
     background: linear-gradient(135deg, #0e0e1f, #12122a);
   }
   .play-icon {
@@ -364,11 +291,8 @@
     background: linear-gradient(135deg, var(--accent1), var(--accent2));
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
-    font-size: 32px;
-    animation: playPulse 2s ease-in-out infinite;
-    cursor: pointer;
-    color: #070710;
-    font-weight: bold;
+    font-size: 32px; animation: playPulse 2s ease-in-out infinite;
+    cursor: pointer; color: #070710; font-weight: bold;
   }
   @keyframes playPulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(0,245,160,0.4); }
@@ -376,11 +300,9 @@
   }
   .video-placeholder p { color: var(--muted); font-size: 15px; }
 
-  /* Footer */
   footer {
     position: relative; z-index: 1;
-    text-align: center;
-    padding: 60px 20px;
+    text-align: center; padding: 60px 20px;
     border-top: 1px solid var(--border);
     color: var(--muted); font-size: 14px;
   }
@@ -390,11 +312,8 @@
     font-weight: 600;
   }
 
-  /* Responsive */
   @media (max-width: 768px) {
-    nav { padding: 16px 24px; }
     section { padding: 80px 20px; }
-    .hero-stats { gap: 30px; }
     .cards-grid { grid-template-columns: 1fr; }
     .modal { padding: 24px; }
   }
@@ -409,7 +328,6 @@
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 
-<!-- Services -->
 <section id="services">
   <div class="section-header">
     <div class="section-tag">আমাদের সার্ভিস</div>
@@ -429,7 +347,7 @@
             <div class="particle" style="left:75%;animation-delay:0.4s;animation-duration:2.8s"></div>
             <div class="particle" style="left:35%;animation-delay:1.2s;animation-duration:3.2s"></div>
           </div>
-        <div class="thumb-icon"><i class="fab fa-facebook-f"></i></div>
+          <div class="thumb-icon"><i class="fab fa-facebook-f"></i></div>
         </div>
         <div class="thumb-badge">🔥 সবচেয়ে জনপ্রিয়</div>
       </div>
@@ -437,15 +355,8 @@
         <span class="card-category">Facebook</span>
         <h3 class="card-title">Facebook Comment Automation</h3>
         <p class="card-desc">ফেসবুক পোস্টে কমেন্ট আসলে স্বয়ংক্রিয়ভাবে রিপ্লাই দিন। কাস্টম মেসেজ, কীওয়ার্ড ট্রিগার এবং স্মার্ট রিপ্লাই সিস্টেম দিয়ে প্রতিটি কমেন্টের জবাব দিন মুহূর্তের মধ্যে।</p>
-        <div class="features">
-          <span class="feat">কীওয়ার্ড ট্রিগার</span>
-          <span class="feat">অটো রিপ্লাই</span>
-          <span class="feat">কাস্টম মেসেজ</span>
-          <span class="feat">২৪/৭ একটিভ</span>
-        </div>
-        <button class="demo-btn" onclick="window.open('https://youtu.be/8gNodNIRXE4?si=lVRXOzCbMr5aNhtI', '_blank')">
-          <span class="btn-icon">▶</span>
-          ডেমো ভিডিও দেখুন
+        <button class="demo-btn" onclick="openModal('fb-comment','Facebook Comment Automation')">
+          <span class="btn-icon">▶</span> ডেমো ভিডিও দেখুন
         </button>
       </div>
     </div>
@@ -467,15 +378,8 @@
         <span class="card-category">Messenger</span>
         <h3 class="card-title">Messenger Automation</h3>
         <p class="card-desc">মেসেঞ্জারে আসা প্রতিটি মেসেজের সাথে সাথে রিপ্লাই দিন। চ্যাটবট তৈরি করুন, অর্ডার নিন এবং কাস্টমারদের প্রশ্নের উত্তর দিন — আপনি ঘুমানোর সময়ও!</p>
-        <div class="features">
-          <span class="feat">চ্যাটবট</span>
-          <span class="feat">অর্ডার ম্যানেজমেন্ট</span>
-          <span class="feat">ফ্লো বিল্ডার</span>
-          <span class="feat">অ্যানালিটিক্স</span>
-        </div>
-        <button class="demo-btn" onclick="window.open('https://youtu.be/LAgy5VxHgCg', '_blank')">
-          <span class="btn-icon">▶</span>
-          ডেমো ভিডিও দেখুন
+        <button class="demo-btn" onclick="openModal('messenger','Messenger Automation')">
+          <span class="btn-icon">▶</span> ডেমো ভিডিও দেখুন
         </button>
       </div>
     </div>
@@ -497,15 +401,8 @@
         <span class="card-category">Instagram</span>
         <h3 class="card-title">Instagram DM Automation</h3>
         <p class="card-desc">ইনস্টাগ্রামে DM আসলে স্বয়ংক্রিয়ভাবে রিপ্লাই দিন। স্টোরি রিপ্লাই, পোস্ট কমেন্ট এবং DM — সব ম্যানেজ করুন একটাই প্ল্যাটফর্ম থেকে।</p>
-        <div class="features">
-          <span class="feat">DM অটোরিপ্লাই</span>
-          <span class="feat">স্টোরি ট্রিগার</span>
-          <span class="feat">লিড জেনারেশন</span>
-          <span class="feat">মাল্টি-অ্যাকাউন্ট</span>
-        </div>
-        <button class="demo-btn" onclick="window.open('https://youtube.com', '_blank')">
-          <span class="btn-icon">▶</span>
-          ডেমো ভিডিও দেখুন
+        <button class="demo-btn" onclick="openModal('instagram','Instagram DM Automation')">
+          <span class="btn-icon">▶</span> ডেমো ভিডিও দেখুন
         </button>
       </div>
     </div>
@@ -527,16 +424,34 @@
         <span class="card-category">WhatsApp</span>
         <h3 class="card-title">WhatsApp Business Automation</h3>
         <p class="card-desc">WhatsApp Business API দিয়ে বাল্ক মেসেজ পাঠান, অর্ডার কনফার্মেশন দিন এবং কাস্টমার সাপোর্ট অটোমেট করুন। সহজ, দ্রুত, কার্যকর।</p>
-        <div class="features">
-          <span class="feat">বাল্ক মেসেজিং</span>
-          <span class="feat">অর্ডার নোটিফিকেশন</span>
-          <span class="feat">টেমপ্লেট মেসেজ</span>
-          <span class="feat">API ইন্টিগ্রেশন</span>
-        </div>
-        <button class="demo-btn" onclick="window.open('https://youtube.com', '_blank')">
-          <span class="btn-icon">▶</span>
-          ডেমো ভিডিও দেখুন
+        <button class="demo-btn" onclick="openModal('whatsapp','WhatsApp Business Automation')">
+          <span class="btn-icon">▶</span> ডেমো ভিডিও দেখুন
         </button>
+      </div>
+    </div>
+
+    <!-- Card 5: Custom AI Automation -->
+    <div class="card card-custom">
+      <div class="thumb">
+        <div class="thumb-bg">
+          <div class="particles">
+            <div class="particle" style="left:20%;animation-delay:0.2s;animation-duration:2.6s"></div>
+            <div class="particle" style="left:50%;animation-delay:0.9s;animation-duration:3.1s"></div>
+            <div class="particle" style="left:75%;animation-delay:0.5s;animation-duration:2.9s"></div>
+            <div class="particle" style="left:40%;animation-delay:1.3s;animation-duration:2.7s"></div>
+          </div>
+          <div class="thumb-icon"><i class="fas fa-robot"></i></div>
+        </div>
+        <div class="thumb-badge">🤖 কাস্টম</div>
+      </div>
+      <div class="card-body">
+        <span class="card-category">Custom AI</span>
+        <h3 class="card-title">Custom AI Automation</h3>
+        <p class="card-desc">আপনার নিজস্ব সমস্যার জন্য কাস্টম অটোমেশন সলিউশন। ই-কমার্স, লিড জেনারেশন, ডেটা ম্যানেজমেন্ট বা যেকোনো ওয়ার্কফ্লো — আপনার প্রয়োজন বুঝে তৈরি করা হবে একদম আপনার জন্য।</p>
+        <a class="demo-btn" href="https://wa.me/8801XXXXXXXXX?text=আমি%20Custom%20AI%20Automation%20সম্পর্কে%20জানতে%20চাই" target="_blank">
+          <span class="btn-icon"><i class="fab fa-whatsapp"></i></span>
+          কন্টাক্ট করুন
+        </a>
       </div>
     </div>
 
@@ -547,7 +462,7 @@
 <div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
   <div class="modal" id="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-eyebrow" id="modal-eyebrow">ডেমো ভিডিও</div>
+    <div class="modal-eyebrow">ডেমো ভিডিও</div>
     <h3 class="modal-title" id="modal-title"></h3>
     <div class="video-wrapper">
       <div class="video-placeholder" id="video-placeholder">
@@ -566,90 +481,69 @@
 </footer>
 
 <script>
-  // Custom cursor
   const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  const ring   = document.getElementById('cursor-ring');
+  let mouseX=0, mouseY=0, ringX=0, ringY=0;
 
   document.addEventListener('mousemove', e => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    cursor.style.transform = `translate(${mouseX - 6}px, ${mouseY - 6}px)`;
+    mouseX=e.clientX; mouseY=e.clientY;
+    cursor.style.transform=`translate(${mouseX-6}px,${mouseY-6}px)`;
   });
 
   function animateRing() {
-    ringX += (mouseX - ringX) * 0.12;
-    ringY += (mouseY - ringY) * 0.12;
-    ring.style.transform = `translate(${ringX - 20}px, ${ringY - 20}px)`;
+    ringX += (mouseX-ringX)*0.12;
+    ringY += (mouseY-ringY)*0.12;
+    ring.style.transform=`translate(${ringX-20}px,${ringY-20}px)`;
     requestAnimationFrame(animateRing);
   }
   animateRing();
 
-  document.querySelectorAll('button, a, .demo-btn').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      ring.style.width = '60px'; ring.style.height = '60px';
-      ring.style.borderColor = 'rgba(0,245,160,0.7)';
-    });
-    el.addEventListener('mouseleave', () => {
-      ring.style.width = '40px'; ring.style.height = '40px';
-      ring.style.borderColor = 'rgba(0,245,160,0.4)';
-    });
+  document.querySelectorAll('button,a,.demo-btn').forEach(el => {
+    el.addEventListener('mouseenter',()=>{ ring.style.width='60px'; ring.style.height='60px'; ring.style.borderColor='rgba(0,245,160,0.7)'; });
+    el.addEventListener('mouseleave',()=>{ ring.style.width='40px'; ring.style.height='40px'; ring.style.borderColor='rgba(0,245,160,0.4)'; });
   });
 
-  // Scroll reveal cards
   const cards = document.querySelectorAll('.card');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), 0);
-      }
-    });
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
-
-  cards.forEach((card, i) => {
-    card.style.transitionDelay = `${i * 0.1}s`;
+  cards.forEach((card,i) => {
+    card.style.transitionDelay=`${i*0.1}s`;
     observer.observe(card);
   });
 
-  // Modal
   const videoLinks = {
     'fb-comment': 'https://www.youtube.com/embed/8gNodNIRXE4',
-    'messenger':  'https://www.youtube.com/embed/dQw4w9WgXcQ',
+    'messenger':  'https://www.youtube.com/embed/LAgy5VxHgCg',
     'instagram':  'https://www.youtube.com/embed/dQw4w9WgXcQ',
     'whatsapp':   'https://www.youtube.com/embed/dQw4w9WgXcQ',
   };
+  let currentVideo='';
 
-  let currentVideo = '';
-
-  function openModal(id, title, type) {
-    currentVideo = videoLinks[id];
-    document.getElementById('modal-title').textContent = title;
+  function openModal(id,title) {
+    currentVideo=videoLinks[id];
+    document.getElementById('modal-title').textContent=title;
     document.getElementById('modal-overlay').classList.add('open');
-    document.getElementById('video-placeholder').style.display = 'flex';
-    document.getElementById('video-frame').style.display = 'none';
-    document.getElementById('video-frame').src = '';
-    document.body.style.overflow = 'hidden';
+    document.getElementById('video-placeholder').style.display='flex';
+    document.getElementById('video-frame').style.display='none';
+    document.getElementById('video-frame').src='';
+    document.body.style.overflow='hidden';
   }
-
   function closeModal() {
     document.getElementById('modal-overlay').classList.remove('open');
-    document.getElementById('video-frame').src = '';
-    document.body.style.overflow = '';
+    document.getElementById('video-frame').src='';
+    document.body.style.overflow='';
   }
-
   function closeModalOutside(e) {
-    if (e.target === document.getElementById('modal-overlay')) closeModal();
+    if(e.target===document.getElementById('modal-overlay')) closeModal();
   }
-
   function playVideo() {
-    document.getElementById('video-placeholder').style.display = 'none';
-    const frame = document.getElementById('video-frame');
-    frame.src = currentVideo + '?autoplay=1';
-    frame.style.display = 'block';
+    document.getElementById('video-placeholder').style.display='none';
+    const f=document.getElementById('video-frame');
+    f.src=currentVideo+'?autoplay=1';
+    f.style.display='block';
   }
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-  });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 </script>
 </body>
 </html>
