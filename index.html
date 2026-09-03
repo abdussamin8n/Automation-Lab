@@ -300,6 +300,12 @@
     .cards-grid { grid-template-columns: 1fr; }
     .modal { padding: 24px; }
   }
+  .card-call::before { background: radial-gradient(circle at top left, rgba(195,20,50,0.12), transparent 60%); }
+.card-call .thumb-bg { background: linear-gradient(135deg, #c31432 0%, #240b36 100%); }
+.card-call .thumb-badge { background: rgba(0, 0, 0, 0.5); color: #ff6b81; }
+.card-call .card-category { background: #c31432; color: #fff; }
+.card-call .demo-btn { background: linear-gradient(135deg, #c31432, #240b36); }
+  
 </style>
 </head>
 <body>
@@ -413,6 +419,28 @@
       </div>
     </div>
 
+<!-- Card 7: Calling Agent -->
+<div class="card card-call">
+  <div class="thumb">
+    <div class="thumb-bg">
+      <div class="particles">
+        <div class="particle" style="left:20%;animation-delay:0.4s;animation-duration:2.7s"></div>
+        <div class="particle" style="left:55%;animation-delay:1.1s;animation-duration:3.1s"></div>
+        <div class="particle" style="left:80%;animation-delay:0.9s;animation-duration:2.5s"></div>
+      </div>
+      <div class="thumb-icon"><i class="fas fa-headset"></i></div>
+    </div>
+    <div class="thumb-badge">🎙️ AI ভয়েস</div>
+  </div>
+  <div class="card-body">
+    <span class="card-category">Calling Agent</span>
+    <h3 class="card-title">AI Calling Agent Automation</h3>
+    <p class="card-desc">একদম হিউম্যানের মতো কথা বলা AI কলিং এজেন্ট দিয়ে কাস্টমারের কল রিসিভ করুন, প্রশ্নের উত্তর দিন, অ্যাপয়েন্টমেন্ট বুক করুন এবং সেলস ফলোআপ করুন — ২৪/৭ স্বয়ংক্রিয়ভাবে, কোনো এজেন্ট ছাড়াই।</p>
+    <button class="demo-btn" onclick="window.open('https://youtu.be/PUT_YOUR_VIDEO_ID_HERE','_blank')">
+      <span class="btn-icon">▶</span> ডেমো ভিডিও দেখুন
+    </button>
+  </div>
+</div>
     <!-- Card 5: Simple To Professional Image — পার্পল থিম + SVG animation -->
     <div class="card card-tg">
       <div class="thumb">
